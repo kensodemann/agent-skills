@@ -1,0 +1,17 @@
+{
+  "name": "agent-skills",
+  "owner": {
+    "name": "Ken Sodemann",
+    "email": "ken.sodemann@gmail.com"
+  },
+  "metadata": {
+    "description": "A set of skills commonly utilized across all of my repositories."
+  },
+  "plugins": [
+    {
+      "name": "agent-skills",
+      "source": "./",
+      "description": "A set of skills commonly utilized across all of my repositories."
+    }
+  ]
+}

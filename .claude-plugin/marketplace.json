@@ -1,15 +1,16 @@
 {
   "name": "agent-skills",
-  "description": "Agent skills marketplace.",
+  "description": "A set of skills commonly utilized across all of my repositories.",
   "owner": {
-    "name": "",
-    "url": ""
+    "name": "Ken Sodemann",
+    "email": "ken.sodemann@gmail.com",
+    "url": "https://kensodemann.github.io/"
   },
   "plugins": [
     {
       "name": "agent-skills",
       "source": "./",
-      "description": "Agent skills plugin."
+      "description": "A set of skills commonly utilized across all of my repositories."
     }
   ]
 }

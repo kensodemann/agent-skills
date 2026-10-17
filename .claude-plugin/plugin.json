@@ -2,15 +2,24 @@
   "name": "agent-skills",
   "displayName": "Agent Skills",
   "version": "1.0.0",
-  "description": "Agent skills plugin.",
+  "description": "A set of skills commonly utilized across all of my repositories.",
   "author": {
-    "name": "",
-    "url": ""
+    "name": "Ken Sodemann",
+    "email": "ken.sodemann@gmail.com",
+    "url": "https://kensodemann.github.io/"
   },
-  "homepage": "",
-  "repository": "",
+  "homepage": "https://github.com/kensodemann/agent-skills",
+  "repository": "https://github.com/kensodemann/agent-skills",
   "keywords": [
-    "agent-skills"
+    "Agent Skills",
+    "Software Development",
+    "SDLC",
+    "TypeScript",
+    "Vue",
+    "JavaScript",
+    "GitHub",
+    "Code Review",
+    "Issue Tracking"
   ],
   "license": "MIT"
 }

@@ -1,0 +1,25 @@
+{
+  "name": "agent-skills",
+  "displayName": "Agent Skills",
+  "version": "1.0.0",
+  "description": "A set of skills commonly utilized across all of my repositories.",
+  "author": {
+    "name": "Ken Sodemann",
+    "email": "ken.sodemann@gmail.com"
+  },
+  "homepage": "https://github.com/kensodemann/agent-skills",
+  "repository": "https://github.com/kensodemann/agent-skills",
+  "keywords": [
+    "Agent Skills",
+    "Software Development",
+    "SDLC",
+    "TypeScript",
+    "Vue",
+    "JavaScript",
+    "GitHub",
+    "Code Review",
+    "Issue Tracking"
+  ],
+  "license": "MIT",
+  "skills": "./skills/"
+}
