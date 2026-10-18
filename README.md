@@ -1,6 +1,6 @@
 # Agent Skills
 
-A set of skills commonly utilized across all of my repositories: GitHub issue workflows (bugs, features, tasks, subtasks) and structured pull request review.
+A set of skills commonly utilized across all of my repositories: GitHub issue workflows (bugs, features, tasks, subtasks), structured pull request review, and Vitest testing (existing behavior, TDD tests, and TDD test plans from issues).
 
 Skills live under [`skills/`](skills/) as standard Agent Skills (`SKILL.md` per folder). This repo ships both a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin (`.claude-plugin/`) and a [Cursor](https://cursor.com/docs/plugins) plugin (`.cursor-plugin/`).
 
@@ -200,6 +200,9 @@ Invoke a skill explicitly with **`/skill-name`** (Cursor IDE, **`agent`**, or Cl
 | [create-task](skills/create-task/) | Create Task issues from the repo template |
 | [create-subtasks](skills/create-subtasks/) | Break work into subtasks |
 | [review-pull-request](skills/review-pull-request/) | Review a PR diff and write feedback to `PRXXX.md` |
+| [create-tests](skills/create-tests/) | Vitest tests for behavior already in the codebase |
+| [create-tdd-tests](skills/create-tdd-tests/) | Failing Vitest TDD tests from `PLAN.md` or a GitHub issue |
+| [create-tdd-test-plan](skills/create-tdd-test-plan/) | `PLAN.md` only — TDD cases from a GitHub issue before writing tests |
 
 ### [create-bug](skills/create-bug/)
 
@@ -241,7 +244,32 @@ Parent issue is #214 (feature: export reports as CSV). Break it into linked subt
 Review pull request #87 in this repository. Review the resulting diff only, write the full review to PR87.md at the repo root, and do not post any comments or reviews on GitHub. In chat, give me only the summary and point me to the file for details.
 ```
 
+### [create-tests](skills/create-tests/)
+
+```text
+/create-tests
+
+Add Vitest coverage for the logout flow in AuthService—behavior already shipped. Follow our testing.mdc mocks and match describe structure used in auth.spec.ts.
+```
+
+### [create-tdd-tests](skills/create-tdd-tests/)
+
+```text
+/create-tdd-tests
+
+Implement TDD tests from @src/services/__tests__/PLAN.md (From PLAN.md path). Tests only; do not edit the plan or implement the feature. Expect failures and list required production changes.
+```
+
+### [create-tdd-test-plan](skills/create-tdd-test-plan/)
+
+```text
+/create-tdd-test-plan
+
+Draft PLAN.md next to where tests for issue #42 will live. Cover the equipment update ACs only—plan only, no spec or feature code.
+```
+
 ---
+
 
 ## Contributing
 
