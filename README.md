@@ -16,6 +16,8 @@ The same plugin and skill discovery applies in the **desktop app** and in the **
 
 #### Cursor Agent CLI (terminal)
 
+**Note:** There is currently a bug in the Cursor CLI that ends up pinning the plugin to the initially installed version, so do not use this method at this time. Instead, clone the repo as a local plugin (`cd ~/.cursor/plugins/local/; git clone git@github.com:kensodemann/agent-skills.git` )
+
 Use this path if you work in the terminal-based agent rather than the IDE **Customize** panel.
 
 1. Register this repository as a plugin marketplace (scriptable; safe to run in dotfiles or setup scripts):
