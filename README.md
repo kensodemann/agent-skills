@@ -10,7 +10,7 @@ Pick the path that matches your editor. **Plugin install** is the easiest way to
 
 ### Cursor
 
-Cursor loads skills from **plugins** or from fixed **skill directories** on disk (see [Manual](#manual)). This repository’s root `skills/` folder is **not** scanned automatically when you only clone and open the repo; install the plugin or copy skills into a discovery path below.
+Cursor loads skills from **plugins** or from fixed **skill directories** on disk (see [Manual Installation](#manual)). This repository’s root `skills/` folder is **not** scanned automatically when you only clone and open the repo; install the plugin or copy skills into a discovery path below.
 
 The same plugin and skill discovery applies in the **desktop app** and in the **terminal Agent CLI** (`agent`, also invokable as `cursor agent`). User-scoped plugin installs sync across both; project-scoped installs follow the workspace you have open.
 
@@ -18,25 +18,20 @@ The same plugin and skill discovery applies in the **desktop app** and in the **
 
 Use this path if you work in the terminal-based agent rather than the IDE **Customize** panel.
 
-1. Install and sign in to the CLI if you have not already ([CLI installation](https://cursor.com/docs/cli/installation)):
-   ```bash
-   curl https://cursor.com/install -fsS | bash
-   agent login
-   ```
-2. Register this repository as a plugin marketplace (scriptable; safe to run in dotfiles or setup scripts):
+1. Register this repository as a plugin marketplace (scriptable; safe to run in dotfiles or setup scripts):
    ```bash
    agent plugin marketplace add https://github.com/kensodemann/agent-skills
    ```
    Optional: pin a branch, tag, or commit with `--git-ref` (for example `--git-ref v1.0.0`). List or refresh marketplaces with `agent plugin marketplace list` and `agent plugin marketplace update https://github.com/kensodemann/agent-skills`.
-3. Start an interactive session from the repo you are working in:
+2. Start an interactive session from the repo you are working in:
    ```bash
    cd /path/to/your-project
    agent
    ```
-4. Install the plugin inside the session:
+3. Install the plugin inside the session:
    - Type **`/plugin`**, open the **Marketplace** tab, select **agent-skills**, and confirm install.
    - Choose **User** (all workspaces on this machine) or **Project / workspace** (current workspace only)—same meaning as in the IDE flow below.
-5. Use skills in the terminal session:
+4. Use skills in the terminal session:
    - **`/skills`** — list discovered skills and validation hints
    - **`/review-pull-request`** (or any skill name) — run that skill for the next turn
    - Or describe the task; the agent can apply a skill when its description matches
@@ -63,16 +58,6 @@ You can pass **`--plugin-dir`** multiple times. Alternatively, clone into `~/.cu
 
 After install, skills appear under **Customize → Skills**. Invoke them from chat with `/skill-name` (for example `/review-pull-request`) or let the agent apply them when the task matches the skill description.
 
-#### Team marketplace (Teams / Enterprise)
-
-Admins can wire the same repo once for the whole org:
-
-1. **Dashboard → Plugins & MCPs → Team Marketplaces → Add Marketplace**
-2. **Import from Repo** → `https://github.com/kensodemann/agent-skills`
-3. Set marketplace access and default install policy (**Default Off**, **Default On**, or **Required**).
-
-Developers then install **agent-skills** from **Customize** or via **`/plugin`** in **`agent`** like any other team plugin.
-
 #### Local plugin development
 
 To test changes without publishing:
@@ -80,8 +65,6 @@ To test changes without publishing:
 1. Clone this repository into `~/.cursor/plugins/local/agent-skills/` (include `.cursor-plugin/` and `skills/`).
 2. **IDE:** **Developer: Reload Window** (or restart Cursor) and confirm under **Customize**.
 3. **CLI:** Start `agent` again, or run `agent --plugin-dir ~/.cursor/plugins/local/agent-skills` from any directory.
-
-Enterprise admins can disable local plugin imports under **Dashboard → Settings → Security & Identity → Marketplace and Plugins**.
 
 ---
 
@@ -208,64 +191,51 @@ Invoke a skill explicitly with **`/skill-name`** (Cursor IDE, **`agent`**, or Cl
 
 ```text
 /create-bug
-
-On mobile Safari, the checkout button stays disabled after autofill until the page is refreshed. Draft a bug issue using our repo template (steps to reproduce, expected behavior, acceptance criteria). Show the full markdown for review before creating the issue.
+On mobile Safari, the checkout button stays disabled after autofill until the page is refreshed.
 ```
 
 ### [create-feature](skills/create-feature/)
 
 ```text
 /create-feature
-
-Add GitHub OAuth as a sign-in option alongside email/password. Draft a feature issue from our template with user stories, components, and checkbox acceptance criteria. Propose the issue body in chat first; create with gh only after I approve.
+Add GitHub OAuth as a sign-in option alongside email/password.
 ```
 
 ### [create-task](skills/create-task/)
 
 ```text
 /create-task
-
-Create a task issue to bump TypeScript to 5.7 across the monorepo and fix any new type errors in the Vue app package. Use our task template and include clear acceptance criteria.
+Bump TypeScript to 5.7 across the monorepo and fix any new type errors in the Vue app package.
 ```
 
 ### [create-subtasks](skills/create-subtasks/)
 
 ```text
-/create-subtasks
-
-Parent issue is #214 (feature: export reports as CSV). Break it into linked subtasks—mix of tasks and smaller features as appropriate. Output each subtask’s full markdown in chat (no files), include "Related to #214" in each body, and wait for my go-ahead before running gh.
+/create-subtasks #214 (export reports as CSV).
 ```
 
 ### [review-pull-request](skills/review-pull-request/)
 
 ```text
-/review-pull-request
-
-Review pull request #87 in this repository. Review the resulting diff only, write the full review to PR87.md at the repo root, and do not post any comments or reviews on GitHub. In chat, give me only the summary and point me to the file for details.
+/review-pull-request #87
 ```
 
 ### [create-tests](skills/create-tests/)
 
 ```text
-/create-tests
-
-Add Vitest coverage for the logout flow in AuthService—behavior already shipped. Follow our testing.mdc mocks and match describe structure used in auth.spec.ts.
+/create-tests Cover the logout flow in AuthService.
 ```
 
 ### [create-tdd-tests](skills/create-tdd-tests/)
 
 ```text
-/create-tdd-tests
-
-Implement TDD tests from @src/services/__tests__/PLAN.md (From PLAN.md path). Tests only; do not edit the plan or implement the feature. Expect failures and list required production changes.
+/create-tdd-tests @src/services/__tests__/PLAN.md
 ```
 
 ### [create-tdd-test-plan](skills/create-tdd-test-plan/)
 
 ```text
-/create-tdd-test-plan
-
-Draft PLAN.md next to where tests for issue #42 will live. Cover the equipment update ACs only—plan only, no spec or feature code.
+/create-tdd-test-plan Issue #42, equipment update acceptance criteria only.
 ```
 
 ---
