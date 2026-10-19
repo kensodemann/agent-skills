@@ -1,6 +1,6 @@
 # Agent Skills
 
-A set of skills commonly utilized across all of my repositories: GitHub issue workflows (bugs, features, tasks, subtasks), structured pull request review, and Vitest testing (existing behavior, TDD tests, and TDD test plans from issues).
+A set of skills commonly utilized across all of my repositories: GitHub issue workflows (bugs, features, tasks, subtasks), structured pull request review, Vitest testing (existing behavior, TDD tests, and TDD test plans from issues), and patch/minor dependency updates for pnpm and npm.
 
 Skills live under [`skills/`](skills/) as standard Agent Skills (`SKILL.md` per folder). This repo ships both a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin (`.claude-plugin/`) and a [Cursor](https://cursor.com/docs/plugins) plugin (`.cursor-plugin/`).
 
@@ -186,6 +186,7 @@ Invoke a skill explicitly with **`/skill-name`** (Cursor IDE, **`agent`**, or Cl
 | [create-tests](skills/create-tests/) | Vitest tests for behavior already in the codebase |
 | [create-tdd-tests](skills/create-tdd-tests/) | Failing Vitest TDD tests from `PLAN.md` or a GitHub issue |
 | [create-tdd-test-plan](skills/create-tdd-test-plan/) | `PLAN.md` only — TDD cases from a GitHub issue before writing tests |
+| [update-deps](skills/update-deps/) | Take patch and minor npm/pnpm updates; report majors, new features, and failures |
 
 ### [create-bug](skills/create-bug/)
 
@@ -236,6 +237,12 @@ Bump TypeScript to 5.7 across the monorepo and fix any new type errors in the Vu
 
 ```text
 /create-tdd-test-plan Issue #42, equipment update acceptance criteria only.
+```
+
+### [update-deps](skills/update-deps/)
+
+```text
+/update-deps
 ```
 
 ---
