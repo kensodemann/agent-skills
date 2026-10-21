@@ -1,6 +1,6 @@
 # Agent Skills
 
-A set of skills commonly utilized across all of my repositories: GitHub issue workflows (bugs, features, tasks, subtasks), structured pull request review, Vitest testing (existing behavior, TDD tests, and TDD test plans from issues), and patch/minor dependency updates for pnpm and npm.
+A set of skills commonly utilized across all of my repositories: GitHub issue workflows (bugs, features, tasks, subtasks), implementation plans from GitHub issues and the next plan step, structured pull request review, Vitest testing (existing behavior, TDD tests, and TDD test plans from issues), and patch/minor dependency updates for pnpm and npm.
 
 Skills live under [`skills/`](skills/) as standard Agent Skills (`SKILL.md` per folder). This repo ships both a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin (`.claude-plugin/`) and a [Cursor](https://cursor.com/docs/plugins) plugin (`.cursor-plugin/`).
 
@@ -184,6 +184,8 @@ Invoke a skill explicitly with **`/skill-name`** (Cursor IDE, **`agent`**, or Cl
 | [create-feature](skills/create-feature/) | Create Feature issues from the repo template |
 | [create-task](skills/create-task/) | Create Task issues from the repo template |
 | [create-subtasks](skills/create-subtasks/) | Break work into subtasks |
+| [plan-implementation](skills/plan-implementation/) | Root `PLAN.md` — implementation steps from a GitHub issue |
+| [implement-next-step](skills/implement-next-step/) | Implement the next incomplete `PLAN.md` step and mark it complete after validation |
 | [review-pull-request](skills/review-pull-request/) | Review a PR diff and write feedback to `PRXXX.md` |
 | [create-tests](skills/create-tests/) | Vitest tests for behavior already in the codebase |
 | [create-tdd-tests](skills/create-tdd-tests/) | Failing Vitest TDD tests from `PLAN.md` or a GitHub issue |
@@ -215,6 +217,18 @@ Bump TypeScript to 5.7 across the monorepo and fix any new type errors in the Vu
 
 ```text
 /create-subtasks #214 (export reports as CSV).
+```
+
+### [plan-implementation](skills/plan-implementation/)
+
+```text
+/plan-implementation 441
+```
+
+### [implement-next-step](skills/implement-next-step/)
+
+```text
+/implement-next-step
 ```
 
 ### [review-pull-request](skills/review-pull-request/)
