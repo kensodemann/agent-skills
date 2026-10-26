@@ -2,6 +2,12 @@
 
 ## [1.2.0]
 
+- Add `plan-implementation` to write a root `PLAN.md` that splits one GitHub issue into reviewable `[STEP-###]` steps.
+- Add `implement-next-step` to implement the next incomplete `PLAN.md` step and mark it complete after the user validates it.
+- Write `review-pull-request` reports to `REVIEW.md`.
+- Document the Cursor CLI bug that pins a plugin to the version first installed, and cloning the repo as a local plugin.
+- Clarify the release process in `CONTRIBUTING.md`.
+
 ## [1.1.0]
 
 - Add `update-deps` to take patch and minor npm/pnpm upgrades, leave major upgrades unapplied, and write `update-report.md`.

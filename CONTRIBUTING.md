@@ -31,7 +31,7 @@ Releases are **automated** when a semver Git tag is pushed. The [Release workflo
 Merge release-related changes to the default branch. You need permission to push tags; GitHub Actions creates the release (`contents: write`).
 
 1. Bump the plugin version in `.claude-plugin/plugin.json` and `.cursor-plugin/plugin.json` (no `v` prefix).
-2. Add a `## [x.y.z]` section to `CHANGELOG.md` for that version. Leave its value empty.
+2. Add a `## [x.y.z]` section to `CHANGELOG.md` for that version and fill it with the changes since the previous version. Prompt: `add the [X.Y.Z] section of CHANGELOG.md with a list of changes since [A.B.C]` (substitute the new and previous versions).
 3. `npx -y @anthropic-ai/claude-code@2.1.300 plugin validate --strict .`
 4. `git tag vX.Y.Z` (substitute the actual version)
 5. `git push origin main`
@@ -42,7 +42,7 @@ Merge release-related changes to the default branch. You need permission to push
 ### Release checklist
 
 - [ ] `plugin.json` `version` updated (no `v` prefix).
-- [ ] `CHANGELOG.md` has a non-empty `## [x.y.z]` section for that version.
+- [ ] `CHANGELOG.md` has a `## [x.y.z]` section listing the changes since the previous version.
 - [ ] Skill names match folder names; `plugin validate --strict .` passes locally.
 - [ ] Tag `vx.y.z` matches `plugin.json` version.
 - [ ] Tag pushed to `origin`; Release workflow succeeded.
@@ -57,7 +57,7 @@ The Git tag you push later must be **`v` + that exact string** (for example tag 
 
 #### 2. Update the changelog
 
-Add a section to [`CHANGELOG.md`](CHANGELOG.md) for the same version (no `v` prefix):
+Add a section to [`CHANGELOG.md`](CHANGELOG.md) for the same version (no `v` prefix). Fill it with the changes since the previous version:
 
 ```markdown
 ## [1.2.0]
