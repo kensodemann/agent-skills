@@ -1,7 +1,7 @@
 ---
 name: review-pull-request
 description: >-
-  Review GitHub pull requests and write structured feedback to PRXXX.md (not
+  Review GitHub pull requests and write structured feedback to REVIEW.md (not
   on the PR). Use when reviewing a PR, writing PR feedback, or doing code review
   on a diff or pull request.
 ---
@@ -13,7 +13,7 @@ Review the **resulting diff**, not intermediate commit history.
 ## Delivery
 
 - **Do not** post review comments on the pull request (no GitHub review threads, inline comments, or `gh pr review` that publishes to the PR).
-- Write the full review to a file named **`PRXXX.md`**, where `XXX` is the pull request number (e.g. `PR42.md` for PR #42). Place the file in the workspace root unless the user specifies another path.
+- Write the full review to a file named **`REVIEW.md`**. Place the file in the workspace root unless the user specifies another path.
 - In the agent chat, **only** echo the review summary (see below) and tell the user to open the generated file for details. Do not paste individual findings into the chat.
 
 ## Report structure
@@ -88,7 +88,7 @@ When a finding needs external justification, add **Documentation:** with one or 
 
 ## Comment format
 
-Use this structure for each substantive finding in `PRXXX.md`:
+Use this structure for each substantive finding in `REVIEW.md`:
 
 **Issue:** Describe what needs attention  
 **Suggestion:** Specific improvement with code example  
