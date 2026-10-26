@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.2.0]
+
 ## [1.1.0]
 
 - Add `update-deps` to take patch and minor npm/pnpm upgrades, leave major upgrades unapplied, and write `update-report.md`.
