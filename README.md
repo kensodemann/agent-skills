@@ -4,6 +4,110 @@ A set of skills commonly utilized across all of my repositories: GitHub issue wo
 
 Skills live under [`skills/`](skills/) as standard Agent Skills (`SKILL.md` per folder). This repo ships both a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin (`.claude-plugin/`) and a [Cursor](https://cursor.com/docs/plugins) plugin (`.cursor-plugin/`).
 
+---
+
+## Usage
+
+After [installing](#installation), open the **repository you are working in**. Issue skills read that repo’s `.github/ISSUE_TEMPLATE/` files; run `gh auth login` if you want the agent to create issues with the GitHub CLI.
+# Agent Skills
+
+A set of skills commonly utilized across all of my repositories: GitHub issue workflows (bugs, features, tasks, subtasks), implementation plans from GitHub issues and the next plan step, structured pull request review, Vitest testing (existing behavior, TDD tests, and TDD test plans from issues), and patch/minor dependency updates for pnpm and npm.
+
+Skills live under [`skills/`](skills/) as standard Agent Skills (`SKILL.md` per folder). This repo ships both a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin (`.claude-plugin/`) and a [Cursor](https://cursor.com/docs/plugins) plugin (`.cursor-plugin/`).
+
+---
+
+## Usage
+
+After [installing](#installation), open the **repository you are working in**. Issue skills read that repo’s `.github/ISSUE_TEMPLATE/` files; run `gh auth login` if you want the agent to create issues with the GitHub CLI.
+
+Invoke a skill explicitly with **`/skill-name`** (Cursor IDE, **`agent`**, or Claude Code), or paste a prompt like the samples below—the agent should match the skill from context.
+
+| Skill | Purpose |
+| ----- | ------- |
+| [create-bug](skills/create-bug/) | Create Bug issues from the repo template |
+| [create-feature](skills/create-feature/) | Create Feature issues from the repo template |
+| [create-task](skills/create-task/) | Create Task issues from the repo template |
+| [create-subtasks](skills/create-subtasks/) | Break work into subtasks |
+| [plan-implementation](skills/plan-implementation/) | Root `PLAN.md` — implementation steps from a GitHub issue |
+| [implement-next-step](skills/implement-next-step/) | Implement the next incomplete `PLAN.md` step and mark it complete after validation |
+| [review-pull-request](skills/review-pull-request/) | Review a PR diff and write feedback to `REVIEW.md` |
+| [create-tests](skills/create-tests/) | Vitest tests for behavior already in the codebase |
+| [create-tdd-tests](skills/create-tdd-tests/) | Failing Vitest TDD tests from `PLAN.md` or a GitHub issue |
+| [create-tdd-test-plan](skills/create-tdd-test-plan/) | `PLAN.md` only — TDD cases from a GitHub issue before writing tests |
+| [update-deps](skills/update-deps/) | Take patch and minor npm/pnpm updates; report majors, new features, and failures |
+
+### [create-bug](skills/create-bug/)
+
+```text
+/create-bug
+On mobile Safari, the checkout button stays disabled after autofill until the page is refreshed.
+```
+
+### [create-feature](skills/create-feature/)
+
+```text
+/create-feature
+Add GitHub OAuth as a sign-in option alongside email/password.
+```
+
+### [create-task](skills/create-task/)
+
+```text
+/create-task
+Bump TypeScript to 5.7 across the monorepo and fix any new type errors in the Vue app package.
+```
+
+### [create-subtasks](skills/create-subtasks/)
+
+```text
+/create-subtasks #214 (export reports as CSV).
+```
+
+### [plan-implementation](skills/plan-implementation/)
+
+```text
+/plan-implementation 441
+```
+
+### [implement-next-step](skills/implement-next-step/)
+
+```text
+/implement-next-step
+```
+
+### [review-pull-request](skills/review-pull-request/)
+
+```text
+/review-pull-request #87
+```
+
+### [create-tests](skills/create-tests/)
+
+```text
+/create-tests Cover the logout flow in AuthService.
+```
+
+### [create-tdd-tests](skills/create-tdd-tests/)
+
+```text
+/create-tdd-tests @src/services/__tests__/PLAN.md
+```
+
+### [create-tdd-test-plan](skills/create-tdd-test-plan/)
+
+```text
+/create-tdd-test-plan Issue #42, equipment update acceptance criteria only.
+```
+
+### [update-deps](skills/update-deps/)
+
+```text
+/update-deps
+```
+
+---
+
 ## Installation
 
 Pick the path that matches your editor. **Plugin install** is the easiest way to get every skill and stay updatable. **Manual install** copies skill folders into discovery directories—you can mix, match, and install only the skills you want.
@@ -171,98 +275,6 @@ Reload the window so Cursor rescans skill directories.
 | **Manual copy** | Cherry-pick skills; full control in git | You manage updates yourself; must use a discovery path (not root `skills/` here) |
 
 ---
-
-## Usage
-
-After installing, open the **repository you are working in**. Issue skills read that repo’s `.github/ISSUE_TEMPLATE/` files; run `gh auth login` if you want the agent to create issues with the GitHub CLI.
-
-Invoke a skill explicitly with **`/skill-name`** (Cursor IDE, **`agent`**, or Claude Code), or paste a prompt like the samples below—the agent should match the skill from context.
-
-| Skill | Purpose |
-| ----- | ------- |
-| [create-bug](skills/create-bug/) | Create Bug issues from the repo template |
-| [create-feature](skills/create-feature/) | Create Feature issues from the repo template |
-| [create-task](skills/create-task/) | Create Task issues from the repo template |
-| [create-subtasks](skills/create-subtasks/) | Break work into subtasks |
-| [plan-implementation](skills/plan-implementation/) | Root `PLAN.md` — implementation steps from a GitHub issue |
-| [implement-next-step](skills/implement-next-step/) | Implement the next incomplete `PLAN.md` step and mark it complete after validation |
-| [review-pull-request](skills/review-pull-request/) | Review a PR diff and write feedback to `PRXXX.md` |
-| [create-tests](skills/create-tests/) | Vitest tests for behavior already in the codebase |
-| [create-tdd-tests](skills/create-tdd-tests/) | Failing Vitest TDD tests from `PLAN.md` or a GitHub issue |
-| [create-tdd-test-plan](skills/create-tdd-test-plan/) | `PLAN.md` only — TDD cases from a GitHub issue before writing tests |
-| [update-deps](skills/update-deps/) | Take patch and minor npm/pnpm updates; report majors, new features, and failures |
-
-### [create-bug](skills/create-bug/)
-
-```text
-/create-bug
-On mobile Safari, the checkout button stays disabled after autofill until the page is refreshed.
-```
-
-### [create-feature](skills/create-feature/)
-
-```text
-/create-feature
-Add GitHub OAuth as a sign-in option alongside email/password.
-```
-
-### [create-task](skills/create-task/)
-
-```text
-/create-task
-Bump TypeScript to 5.7 across the monorepo and fix any new type errors in the Vue app package.
-```
-
-### [create-subtasks](skills/create-subtasks/)
-
-```text
-/create-subtasks #214 (export reports as CSV).
-```
-
-### [plan-implementation](skills/plan-implementation/)
-
-```text
-/plan-implementation 441
-```
-
-### [implement-next-step](skills/implement-next-step/)
-
-```text
-/implement-next-step
-```
-
-### [review-pull-request](skills/review-pull-request/)
-
-```text
-/review-pull-request #87
-```
-
-### [create-tests](skills/create-tests/)
-
-```text
-/create-tests Cover the logout flow in AuthService.
-```
-
-### [create-tdd-tests](skills/create-tdd-tests/)
-
-```text
-/create-tdd-tests @src/services/__tests__/PLAN.md
-```
-
-### [create-tdd-test-plan](skills/create-tdd-test-plan/)
-
-```text
-/create-tdd-test-plan Issue #42, equipment update acceptance criteria only.
-```
-
-### [update-deps](skills/update-deps/)
-
-```text
-/update-deps
-```
-
----
-
 
 ## Contributing
 
