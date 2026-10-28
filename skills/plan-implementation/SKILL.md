@@ -1,10 +1,10 @@
 ---
 name: plan-implementation
 description: >-
-  Write PLAN.md at the repository root that splits one GitHub issue into
-  reviewable implementation steps labeled [STEP-###]. Use when the user gives
-  an issue number and asks to plan the implementation, break the issue into
-  steps, or create PLAN.md. Does not implement steps or mark them complete.
+  Write PLAN.md at the repository root for a task or a bug. The plan breaks
+  that issue into implementation steps. Use when the user gives an issue
+  number and asks for that plan. A feature is refused until it is broken
+  into tasks. Does not implement steps or mark them complete.
   implement-next-step does that.
 ---
 
@@ -58,13 +58,17 @@ After the user answers, those choices are settled. Then write the plan.
 ## Workflow
 
 1. Read the current branch. If it is `main`, stop.
-2. Load the issue: `gh issue view <number> --comments`.
+2. Load the issue: `gh issue view <number> --json title,body,state,url,comments,issueType`.
 3. If the branch is not `feature/` plus the title slug or wording close to the title, and not `<issue-number>-<title-slug>`, ask whether it is the correct feature branch and wait.
-4. Read the code the issue touches. Name real files only. State current behavior from that code.
-5. When the repository already tests an area a step changes, include those test files in the step and state what they should assert. Do not require a failing test before production code. Do not add a new test suite when that area has none and the issue does not ask for tests.
-6. Take build, test, and lint from the repository (package scripts, Makefile, task runner, or project rules). Those commands are the commit gate. They must succeed with no warning or error.
-7. Write root `PLAN.md` with the sections below.
-8. Tell the user to review and edit the plan. **implement-next-step** implements the next incomplete step and marks it complete only after the user validates it.
+4. Classify `issueType.name`.
+   - `Feature`: stop. Tell the human to break it into tasks first. Do not write `PLAN.md`.
+   - `Task` or `Bug`: continue. A task is one unit of work, stand-alone or a child of a feature, and is never a parent. Write root `PLAN.md` in this request. Do not stop to propose splitting the issue into child issues. Do not refuse it for being large. Do not read sub-issues.
+   - `issueType` null, or any other name: name what was found and wait. Do not write `PLAN.md`.
+5. Read the code the issue touches. Name real files only. State current behavior from that code.
+6. When the repository already tests an area a step changes, include those test files in the step and state what they should assert. Do not require a failing test before production code. Do not add a new test suite when that area has none and the issue does not ask for tests.
+7. Take build, test, and lint from the repository (package scripts, Makefile, task runner, or project rules). Those commands are the commit gate. They must succeed with no warning or error.
+8. Write root `PLAN.md` with the sections below.
+9. Tell the user to review and edit the plan. **implement-next-step** implements the next incomplete step and marks it complete only after the user validates it.
 
 ## PLAN.md sections
 
