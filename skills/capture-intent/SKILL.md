@@ -46,9 +46,9 @@ After the file is written, recommend one type from this table and then stop. Nam
 
 | Type | When to use it | What happens next |
 | ---- | -------------- | ----------------- |
-| Feature | The work needs to be broken into tasks. A change that does not need a breakdown is a task. | Child tasks, after approval. Never `PLAN.md`. |
-| Task | One chunk of work, with or without a parent. A child task uses the Task template and `Related to #N`. | A leaf task is planned on request. A task that already has subtasks is a container and is not planned or worked. |
-| Bug | A defect. A short report uses `create-bug` with no `INTENT.md`. A larger defect may start as `INTENT.md` and then become one bug. | Always one issue, then `PLAN.md`. |
+| Feature | The work must be broken into child tasks. A change that does not need a breakdown is a task. | Child tasks via `create-tasks` after the feature exists. Never `PLAN.md` on the feature. |
+| Task | Always one unit of work. Stand-alone, or a child of a feature when the human attaches it. Never a parent. | A leaf task is planned on request. |
+| Bug | A defect. Always stand-alone, with no child tasks. A short report uses `create-bug` with no `INTENT.md`. A larger defect may start as `INTENT.md` and then become one bug. | Always one issue, then `PLAN.md`. |
 
 A short defect still gets `INTENT.md` when this skill was asked to write it. The recommendation can note that a future short report may use `create-bug` with no `INTENT.md`.
 

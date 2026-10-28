@@ -1,6 +1,6 @@
 # Agent Skills
 
-A set of skills commonly utilized across all of my repositories: GitHub issue workflows (bugs, features, tasks, subtasks), implementation plans from GitHub issues and the next plan step, structured pull request review, Vitest testing (existing behavior, TDD tests, and TDD test plans from issues), and patch/minor dependency updates for pnpm and npm.
+A set of skills commonly utilized across all of my repositories: GitHub issue workflows (bugs, features, and tasks), implementation plans from GitHub issues and the next plan step, structured pull request review, Vitest testing (existing behavior, TDD tests, and TDD test plans from issues), and patch/minor dependency updates for pnpm and npm.
 
 Skills live under [`skills/`](skills/) as standard Agent Skills (`SKILL.md` per folder). This repo ships both a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin (`.claude-plugin/`) and a [Cursor](https://cursor.com/docs/plugins) plugin (`.cursor-plugin/`).
 
@@ -11,7 +11,7 @@ Skills live under [`skills/`](skills/) as standard Agent Skills (`SKILL.md` per 
 After [installing](#installation), open the **repository you are working in**. Issue skills read that repo’s `.github/ISSUE_TEMPLATE/` files; run `gh auth login` if you want the agent to create issues with the GitHub CLI.
 # Agent Skills
 
-A set of skills commonly utilized across all of my repositories: GitHub issue workflows (bugs, features, tasks, subtasks), implementation plans from GitHub issues and the next plan step, structured pull request review, Vitest testing (existing behavior, TDD tests, and TDD test plans from issues), and patch/minor dependency updates for pnpm and npm.
+A set of skills commonly utilized across all of my repositories: GitHub issue workflows (bugs, features, and tasks), implementation plans from GitHub issues and the next plan step, structured pull request review, Vitest testing (existing behavior, TDD tests, and TDD test plans from issues), and patch/minor dependency updates for pnpm and npm.
 
 Skills live under [`skills/`](skills/) as standard Agent Skills (`SKILL.md` per folder). This repo ships both a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin (`.claude-plugin/`) and a [Cursor](https://cursor.com/docs/plugins) plugin (`.cursor-plugin/`).
 
@@ -28,7 +28,7 @@ Invoke a skill explicitly with **`/skill-name`** (Cursor IDE, **`agent`**, or Cl
 | [create-bug](skills/create-bug/) | Create Bug issues from the repo template |
 | [create-feature](skills/create-feature/) | Create Feature issues from the repo template |
 | [create-task](skills/create-task/) | Create Task issues from the repo template |
-| [create-subtasks](skills/create-subtasks/) | Break work into subtasks |
+| [create-tasks](skills/create-tasks/) | Divide a feature into child tasks |
 | [plan-implementation](skills/plan-implementation/) | Root `PLAN.md` — implementation steps from a GitHub issue |
 | [implement-next-step](skills/implement-next-step/) | Implement the next incomplete `PLAN.md` step and mark it complete after validation |
 | [review-pull-request](skills/review-pull-request/) | Review a PR diff and write feedback to `REVIEW.md` |
@@ -58,10 +58,10 @@ Add GitHub OAuth as a sign-in option alongside email/password.
 Bump TypeScript to 5.7 across the monorepo and fix any new type errors in the Vue app package.
 ```
 
-### [create-subtasks](skills/create-subtasks/)
+### [create-tasks](skills/create-tasks/)
 
 ```text
-/create-subtasks #214 (export reports as CSV).
+/create-tasks #123
 ```
 
 ### [plan-implementation](skills/plan-implementation/)

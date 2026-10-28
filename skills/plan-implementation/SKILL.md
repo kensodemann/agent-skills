@@ -12,7 +12,7 @@ description: >-
 
 **Scope:** Write **`PLAN.md` at the repository root** only. Do not implement a step, edit application or test code, commit, or set Status to complete.
 
-Not **create-tdd-test-plan** (TDD cases beside a spec) and not **create-subtasks** (GitHub child issues).
+Not **create-tdd-test-plan** (TDD cases beside a spec) and not **create-tasks** (GitHub child tasks under a feature).
 
 The user passes a GitHub issue number. The current repository owns that issue.
 
