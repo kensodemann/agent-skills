@@ -34,7 +34,7 @@ If the branch matches none of those, ask whether this branch is the correct feat
 
 ## Chunks
 
-- The size of the chunks for the task is determined by a logical breakdown of the feature or task
+- The size of the chunks for the task is determined by a logical breakdown of the bug or task
 - The chunk should be large enough to be a meaningful and self-contained change, but small enough for a human to quickly review, both within the PLAN.md and in the code
 - The chunks will be labeled as [STEP-###]
 - The working flow after the plan is generated is that a user will ask for a step to be implemented. After the step is implemented (AI), the human will review the change, potentially request changes or make the changes themselves, and eventually commit the change
@@ -76,7 +76,7 @@ After the user answers, those choices are settled. Then write the plan.
 
 Title: `# PLAN-<number> — <short title>`
 
-First lines: `Issue: [#<number>](<url>) (<state>).` Then dependency or epic links only when the issue states them.
+First lines: `Issue: [#<number>](<url>) (<state>).` Then dependency, related issue, or parent feature links only when the issue states them.
 
 One short paragraph of current behavior, with the files and symbols the steps change.
 
