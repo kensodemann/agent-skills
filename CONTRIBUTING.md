@@ -36,8 +36,7 @@ Merge release-related changes to the default branch. You need permission to push
 4. `git tag vX.Y.Z` (substitute the actual version)
 5. `git push origin main`
 6. `git push vX.Y.Z` (substitute the actual version)
-7. Commit, tag `v*.*.*`, and push the tag.
-8. CI checks the version, validates the plugin, zips `skills/`, and publishes the GitHub Release.
+7. CI checks the version, validates the plugin, zips `skills/`, and publishes the GitHub Release.
 
 ### Release checklist
 
