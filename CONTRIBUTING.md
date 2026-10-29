@@ -51,7 +51,7 @@ Merge release-related changes to the default branch. You need permission to push
 
 #### 1. Bump the plugin version
 
-Set `version` in [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) to the new semver **without** a `v` prefix (for example `1.2.0`).
+Set `version` in [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) and [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) to the new semver **without** a `v` prefix (for example `1.2.0`).
 
 The Git tag you push later must be **`v` + that exact string** (for example tag `v1.2.0` for version `1.2.0`). If they differ, the release job fails.
 
