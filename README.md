@@ -18,7 +18,7 @@ Invoke a skill explicitly with **`/skill-name`** (Cursor IDE, **`agent`**, or Cl
 
 1. [capture-intent](skills/capture-intent/) writes one root `INTENT.md`. The file is a working draft and is not committed. This skill does not create the GitHub issue.
 2. [create-feature](skills/create-feature/), [create-task](skills/create-task/), or [create-bug](skills/create-bug/) files the issue from that accepted intent, or from a prompt. A target repository needs `.github/ISSUE_TEMPLATE/bug.md`, `feature.md`, and `task.md`. This repository does not add those templates to target repos. If any of the three is missing, the issue skill names the missing files and waits.
-3. A feature must be broken into leaf child tasks with [create-tasks](skills/create-tasks/) (`/create-tasks #N`). A feature is never planned directly. A task is one unit of work: [create-task](skills/create-task/) creates it stand-alone unless the human names a parent feature, and a task is never a parent. A bug is a stand-alone defect and is never split. It may reference a related feature or task, and it is never a child of that issue. The tree is only a feature and its child tasks.
+3. A feature must be broken into leaf child tasks with [create-tasks](skills/create-tasks/) (`/create-tasks #N`). A feature is never planned directly. A task is one unit of work: [create-task](skills/create-task/) creates it stand-alone unless the human names a parent feature, and a task is never a parent. A stand-alone task may reference a related feature or another task, and it is not a child of that issue. A bug is a stand-alone defect and is never split. It may reference a related feature or task, and it is never a child of that issue. The tree is only a feature and its child tasks.
 4. [plan-implementation](skills/plan-implementation/) writes one root `PLAN.md` for a task or a bug. Each step lists the test files for that change. A feature is refused until [create-tasks](skills/create-tasks/) has divided it.
 5. [implement-next-step](skills/implement-next-step/) carries out the next incomplete step and asks the human to validate it. It marks the step complete only after the human says it is complete. The human commits. The skill does not commit and does not open the pull request. When the human says `tests only` or `tests-only`, the skill writes that step’s tests and leaves production code unchanged.
 6. The human opens the pull request.
@@ -32,7 +32,7 @@ Invoke a skill explicitly with **`/skill-name`** (Cursor IDE, **`agent`**, or Cl
 | [capture-intent](skills/capture-intent/) | Write an uncommitted root `INTENT.md` and recommend feature, task, or bug |
 | [create-feature](skills/create-feature/) | File a feature that must be split into child tasks |
 | [create-tasks](skills/create-tasks/) | Divide a feature into leaf child tasks (`/create-tasks #N`) |
-| [create-task](skills/create-task/) | File one task, stand-alone unless the human names a parent feature |
+| [create-task](skills/create-task/) | File one task, stand-alone unless the human names a parent feature. A stand-alone task may reference a related feature or another task, and it is not a child of that issue |
 | [create-bug](skills/create-bug/) | File a stand-alone bug. It may reference a related feature or task, and it is never a child of that issue |
 | [plan-implementation](skills/plan-implementation/) | Write one root `PLAN.md` for a task or a bug |
 | [implement-next-step](skills/implement-next-step/) | Implement the next incomplete step, including `tests only`, and mark it complete after the human validates it |
