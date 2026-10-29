@@ -12,7 +12,9 @@ description: >-
 
 **Scope:** Write **`PLAN.md` at the repository root** only. Do not implement a step, edit application or test code, commit, or set Status to complete.
 
-Not **create-tdd-test-plan** (TDD cases beside a spec) and not **create-tasks** (GitHub child tasks under a feature).
+This skill writes the only `PLAN.md` for a change, at the repository root. Each step lists the test files for the change it makes. There is no `PLAN.md` beside a spec.
+
+Not **create-tasks** (GitHub child tasks under a feature).
 
 The user passes a GitHub issue number. The current repository owns that issue.
 
@@ -65,7 +67,7 @@ After the user answers, those choices are settled. Then write the plan.
    - `Task` or `Bug`: continue. A task is one unit of work, stand-alone or a child of a feature, and is never a parent. Write root `PLAN.md` in this request. Do not stop to propose splitting the issue into child issues. Do not refuse it for being large. Do not read sub-issues.
    - `issueType` null, or any other name: name what was found and wait. Do not write `PLAN.md`.
 5. Read the code the issue touches. Name real files only. State current behavior from that code.
-6. When the repository already tests an area a step changes, include those test files in the step and state what they should assert. Do not require a failing test before production code. Do not add a new test suite when that area has none and the issue does not ask for tests.
+6. The step lists the test files for the change it makes and states what they assert. Do not require a failing test before production code. Do not add a new test suite when that area has none and the issue does not ask for tests. Do not write a second `PLAN.md`.
 7. Take build, test, and lint from the repository (package scripts, Makefile, task runner, or project rules). Those commands are the commit gate. They must succeed with no warning or error.
 8. Write root `PLAN.md` with the sections below.
 9. Tell the user to review and edit the plan. **implement-next-step** implements the next incomplete step and marks it complete only after the user validates it.

@@ -3,7 +3,10 @@ name: create-tests
 description: >-
   Add Vitest tests for behavior that already exists in the codebase. Use when
   the user asks to test existing functionality, add coverage, or write tests for
-  a component, page, or service without a GitHub issue TDD workflow.
+  a component, page, or service. Tests for behavior that is not in the tree yet
+  belong on the root implementation PLAN.md. plan-implementation writes that
+  plan when it does not exist. implement-next-step carries out the step once
+  the plan exists.
 ---
 
 # Create Tests for Existing Functionality
@@ -42,4 +45,4 @@ The **logical scope** for new tests is the function or unit `describe`, not nece
 5. **Implement tests** — Follow project rules; use shared test data helpers when present.
 6. **Run tests** — Use the project’s Vitest command. Fix test code if setup is wrong; report likely product bugs if behavior contradicts the implementation the user intended to test.
 
-When the user names a GitHub issue for **context only**, use `gh issue view` to understand acceptance criteria, but treat all tests as **existing functionality** unless they ask for TDD (use **create-tdd-tests** or **create-tdd-test-plan** instead).
+When the user names a GitHub issue for **context only**, use `gh issue view` to understand acceptance criteria, and treat all tests as **existing functionality**. When the user wants tests for behavior that is not in the tree yet, stop. If the root implementation `PLAN.md` does not exist, point them at **plan-implementation**. If it exists, point them at **implement-next-step**. Do not write those tests in this skill.
