@@ -1,19 +1,10 @@
 # Agent Skills
 
-A set of skills commonly utilized across all of my repositories: GitHub issue workflows (bugs, features, and tasks), implementation plans from GitHub issues and the next plan step, structured pull request review, Vitest testing (existing behavior, TDD tests, and TDD test plans from issues), and patch/minor dependency updates for pnpm and npm.
+Skills for the path from a written intent to a reviewed pull request. This repo ships both a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin (`.claude-plugin/`) and a [Cursor](https://cursor.com/docs/plugins) plugin (`.cursor-plugin/`). The loop in this README is the one both plugins ship.
 
-Skills live under [`skills/`](skills/) as standard Agent Skills (`SKILL.md` per folder). This repo ships both a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin (`.claude-plugin/`) and a [Cursor](https://cursor.com/docs/plugins) plugin (`.cursor-plugin/`).
+`create-tests` and `update-deps` stay outside that loop. `create-tests` covers behavior already in the codebase. `update-deps` takes patch and minor npm and pnpm updates.
 
----
-
-## Usage
-
-After [installing](#installation), open the **repository you are working in**. Issue skills read that repo’s `.github/ISSUE_TEMPLATE/` files; run `gh auth login` if you want the agent to create issues with the GitHub CLI.
-# Agent Skills
-
-A set of skills commonly utilized across all of my repositories: GitHub issue workflows (bugs, features, and tasks), implementation plans from GitHub issues and the next plan step, structured pull request review, Vitest testing (existing behavior, TDD tests, and TDD test plans from issues), and patch/minor dependency updates for pnpm and npm.
-
-Skills live under [`skills/`](skills/) as standard Agent Skills (`SKILL.md` per folder). This repo ships both a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin (`.claude-plugin/`) and a [Cursor](https://cursor.com/docs/plugins) plugin (`.cursor-plugin/`).
+Skills live under [`skills/`](skills/) as standard Agent Skills (`SKILL.md` per folder).
 
 ---
 
@@ -23,25 +14,37 @@ After [installing](#installation), open the **repository you are working in**. I
 
 Invoke a skill explicitly with **`/skill-name`** (Cursor IDE, **`agent`**, or Claude Code), or paste a prompt like the samples below—the agent should match the skill from context.
 
+### Loop
+
+1. [capture-intent](skills/capture-intent/) writes one root `INTENT.md`. The file is a working draft and is not committed. This skill does not create the GitHub issue.
+2. [create-feature](skills/create-feature/), [create-task](skills/create-task/), or [create-bug](skills/create-bug/) files the issue from that accepted intent, or from a prompt. A target repository needs `.github/ISSUE_TEMPLATE/bug.md`, `feature.md`, and `task.md`. This repository does not add those templates to target repos. If any of the three is missing, the issue skill names the missing files and waits.
+3. A feature must be broken into leaf child tasks with [create-tasks](skills/create-tasks/) (`/create-tasks #N`). A feature is never planned directly. A task is one unit of work: [create-task](skills/create-task/) creates it stand-alone unless the human names a parent feature, and a task is never a parent. A bug is a stand-alone defect and is never split. The tree is only a feature and its child tasks.
+4. [plan-implementation](skills/plan-implementation/) writes one root `PLAN.md` for a task or a bug. Each step lists the test files for that change. A feature is refused until [create-tasks](skills/create-tasks/) has divided it.
+5. [implement-next-step](skills/implement-next-step/) carries out the next incomplete step and asks the human to validate it. It marks the step complete only after the human says it is complete. The human commits. The skill does not commit and does not open the pull request. When the human says `tests only` or `tests-only`, the skill writes that step’s tests and leaves production code unchanged.
+6. The human opens the pull request.
+7. [review-pull-request](skills/review-pull-request/) writes `REVIEW.md` and does not post on the pull request.
+8. The human addresses that feedback with ordinary prompts. No skill owns that turn.
+
+[create-tests](skills/create-tests/) and [update-deps](skills/update-deps/) stay outside the loop. [create-tests](skills/create-tests/) covers behavior already in the codebase. [update-deps](skills/update-deps/) takes patch and minor npm and pnpm updates.
+
 | Skill | Purpose |
 | ----- | ------- |
-| [create-bug](skills/create-bug/) | Create Bug issues from the repo template |
-| [create-feature](skills/create-feature/) | Create Feature issues from the repo template |
-| [create-task](skills/create-task/) | Create Task issues from the repo template |
-| [create-tasks](skills/create-tasks/) | Divide a feature into child tasks |
-| [plan-implementation](skills/plan-implementation/) | Root `PLAN.md` — implementation steps from a GitHub issue |
-| [implement-next-step](skills/implement-next-step/) | Implement the next incomplete `PLAN.md` step and mark it complete after validation |
-| [review-pull-request](skills/review-pull-request/) | Review a PR diff and write feedback to `REVIEW.md` |
-| [create-tests](skills/create-tests/) | Vitest tests for behavior already in the codebase |
-| [create-tdd-tests](skills/create-tdd-tests/) | Failing Vitest TDD tests from `PLAN.md` or a GitHub issue |
-| [create-tdd-test-plan](skills/create-tdd-test-plan/) | `PLAN.md` only — TDD cases from a GitHub issue before writing tests |
-| [update-deps](skills/update-deps/) | Take patch and minor npm/pnpm updates; report majors, new features, and failures |
+| [capture-intent](skills/capture-intent/) | Write an uncommitted root `INTENT.md` and recommend feature, task, or bug |
+| [create-feature](skills/create-feature/) | File a feature that must be split into child tasks |
+| [create-tasks](skills/create-tasks/) | Divide a feature into leaf child tasks (`/create-tasks #N`) |
+| [create-task](skills/create-task/) | File one task, stand-alone unless the human names a parent feature |
+| [create-bug](skills/create-bug/) | File a stand-alone bug |
+| [plan-implementation](skills/plan-implementation/) | Write one root `PLAN.md` for a task or a bug |
+| [implement-next-step](skills/implement-next-step/) | Implement the next incomplete step, including `tests only`, and mark it complete after the human validates it |
+| [review-pull-request](skills/review-pull-request/) | Write `REVIEW.md` only. Do not post on the pull request |
+| [create-tests](skills/create-tests/) | Vitest tests for behavior already in the codebase. Outside the loop |
+| [update-deps](skills/update-deps/) | Patch and minor npm/pnpm updates. Outside the loop |
 
-### [create-bug](skills/create-bug/)
+### [capture-intent](skills/capture-intent/)
 
 ```text
-/create-bug
-On mobile Safari, the checkout button stays disabled after autofill until the page is refreshed.
+/capture-intent
+I want a shared inbox that files each request as a bug, a feature, or a task.
 ```
 
 ### [create-feature](skills/create-feature/)
@@ -51,6 +54,12 @@ On mobile Safari, the checkout button stays disabled after autofill until the pa
 Add GitHub OAuth as a sign-in option alongside email/password.
 ```
 
+### [create-tasks](skills/create-tasks/)
+
+```text
+/create-tasks #123
+```
+
 ### [create-task](skills/create-task/)
 
 ```text
@@ -58,10 +67,11 @@ Add GitHub OAuth as a sign-in option alongside email/password.
 Bump TypeScript to 5.7 across the monorepo and fix any new type errors in the Vue app package.
 ```
 
-### [create-tasks](skills/create-tasks/)
+### [create-bug](skills/create-bug/)
 
 ```text
-/create-tasks #123
+/create-bug
+On mobile Safari, the checkout button stays disabled after autofill until the page is refreshed.
 ```
 
 ### [plan-implementation](skills/plan-implementation/)
@@ -76,6 +86,11 @@ Bump TypeScript to 5.7 across the monorepo and fix any new type errors in the Vu
 /implement-next-step
 ```
 
+```text
+/implement-next-step
+tests only
+```
+
 ### [review-pull-request](skills/review-pull-request/)
 
 ```text
@@ -86,18 +101,6 @@ Bump TypeScript to 5.7 across the monorepo and fix any new type errors in the Vu
 
 ```text
 /create-tests Cover the logout flow in AuthService.
-```
-
-### [create-tdd-tests](skills/create-tdd-tests/)
-
-```text
-/create-tdd-tests @src/services/__tests__/PLAN.md
-```
-
-### [create-tdd-test-plan](skills/create-tdd-test-plan/)
-
-```text
-/create-tdd-test-plan Issue #42, equipment update acceptance criteria only.
 ```
 
 ### [update-deps](skills/update-deps/)
