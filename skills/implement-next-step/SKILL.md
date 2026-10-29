@@ -3,9 +3,11 @@ name: implement-next-step
 description: >-
   Implement the next incomplete step in the repository root PLAN.md, then ask
   the user to validate it. Use when the user asks to implement the next step,
-  continue a PLAN.md step, or mark a validated step complete. Further changes
-  stay on that step until the user says it is complete. Does not commit or
-  start the following step.
+  continue a PLAN.md step, or mark a validated step complete. Also use when the
+  user says "tests only" or "tests-only": write that step's tests, leave
+  production code unchanged, do not commit, and do not mark the step complete.
+  Further changes stay on that step until the user says it is complete. Does
+  not commit or start the following step.
 ---
 
 # Implement next step
@@ -32,12 +34,25 @@ The next step is the first **File order** row whose Status is not `complete`. Em
 
 ## Implement
 
+The normal path runs when the user did not say `tests only` or `tests-only`.
+
 1. Check the branch (see Prerequisite).
 2. Implement only that step: its files, in the listed order, its **Change**, its acceptance criteria, and any Decisions or contract text the step depends on. Leave **Out of scope** work undone.
 3. Run the step's **Spot-check** when it has one, then every commit-gate command in `PLAN.md`. Each must succeed with no warning or error. Fix failures that are inside this step and run them again.
 4. Ask the user to validate the step. They may ask for more work, or they may edit the code themselves. Do not mark the step complete in this turn.
 
 Do not revert edits the user made. A request for more work is not validation: make those changes, stay inside this step, re-run the spot-check and the commit gate, then ask again.
+
+The tests-only path runs instead of the normal path when the user says `tests only` or `tests-only`.
+
+1. Use the same **Prerequisite** and **Which step** rules. One incomplete step only.
+2. Edit only the test files that step names. A listed file is a test file when that step's **Files** entry or **Change** text describes it as a test. Leave every production file unchanged, including production files the step lists. If the step names no test file, stop and say so. Do not add a test path the step does not list.
+3. Write those tests from the step's **Change**, acceptance criteria, and any Decisions or contract text the step depends on. Leave **Out of scope** work undone.
+4. When the behavior those tests describe is not in the tree, leave the tests failing. Do not add or edit production code to make them pass. When that behavior is already in the tree, the tests are expected to pass. Fix a failure of that kind only in the test files.
+5. Run the step's **Spot-check** when it has one, then the commit-gate commands in `PLAN.md`. A test failure caused by missing behavior is the expected result: report it, and do not treat it as a prompt to edit production code. A gate command other than that expected test failure must succeed with no warning or error. Fix a failure inside the test files and run the commands again.
+6. Ask the user to validate. Do not mark the step complete. Do not commit. Do not start the next step.
+
+On the tests-only path, a request for more work stays inside this step. More work still does not edit production code and still does not mark the step complete. Do not revert edits the user made.
 
 ## Mark complete
 
