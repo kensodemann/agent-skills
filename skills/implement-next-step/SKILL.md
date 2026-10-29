@@ -18,9 +18,11 @@ description: >-
 
 ## Prerequisite
 
-The current git branch must not have any uncommitted changes, must contain a `PLAN.md` file, and must not be `main`.
+The current branch must contain a root `PLAN.md` and must not be `main`. If the branch is `main`, or there is no root `PLAN.md`, stop. Do not implement and do not mark a step complete.
 
-If the branch is `main` or if uncommitted changes currently exist, stop. Do not implement and do not mark a step complete.
+Require a clean working tree only when starting a step. Starting means the first request to implement that step, including `/implement-next-step` or a request that names the step, when that step is not already in progress. If uncommitted changes exist at that start, stop. Do not implement.
+
+A step is already in progress when this conversation has started it and it is not yet marked complete, or when the user is asking for more work on it, asking for `tests only` on it, or saying it is complete. Uncommitted changes from that work are part of the step. Once the step is in progress, further updates stay on that step and do not require a commit in between. Do not stop for a dirty tree. Marking the step complete does not require a clean tree. The human commits after it is marked complete. The next step starts only after that, and that start requires a clean tree again.
 
 ## Which step
 
@@ -36,7 +38,7 @@ The next step is the first **File order** row whose Status is not `complete`. Em
 
 The normal path runs when the user did not say `tests only` or `tests-only`.
 
-1. Check the branch (see Prerequisite).
+1. Check the branch (see Prerequisite). Apply the clean-tree stop only when this step is not already in progress.
 2. Implement only that step: its files, in the listed order, its **Change**, its acceptance criteria, and any Decisions or contract text the step depends on. Leave **Out of scope** work undone.
 3. Run the step's **Spot-check** when it has one, then every commit-gate command in `PLAN.md`. Each must succeed with no warning or error. Fix failures that are inside this step and run them again.
 4. Ask the user to validate the step. They may ask for more work, or they may edit the code themselves. Do not mark the step complete in this turn.
@@ -45,7 +47,7 @@ Do not revert edits the user made. A request for more work is not validation: ma
 
 The tests-only path runs instead of the normal path when the user says `tests only` or `tests-only`.
 
-1. Use the same **Prerequisite** and **Which step** rules. One incomplete step only.
+1. Use the same **Prerequisite** and **Which step** rules. One incomplete step only. Apply the clean-tree stop only when this step is not already in progress.
 2. Edit only the test files that step names. A listed file is a test file when that step's **Files** entry or **Change** text describes it as a test. Leave every production file unchanged, including production files the step lists. If the step names no test file, stop and say so. Do not add a test path the step does not list.
 3. Write those tests from the step's **Change**, acceptance criteria, and any Decisions or contract text the step depends on. Leave **Out of scope** work undone.
 4. When the behavior those tests describe is not in the tree, leave the tests failing. Do not add or edit production code to make them pass. When that behavior is already in the tree, the tests are expected to pass. Fix a failure of that kind only in the test files.
@@ -56,7 +58,7 @@ On the tests-only path, a request for more work stays inside this step. More wor
 
 ## Mark complete
 
-Mark the step only after the user explicitly says it is complete.
+Mark the step only after the user explicitly says it is complete. Uncommitted changes from this step are expected. Do not apply the clean-tree stop.
 
 1. Run the commit-gate commands if they have not been run since the last change. If any command fails or warns, report that and do not mark the step. Wait for a fix or for more work.
 2. Set Status to `complete` in the **File order** row and in that step's `**Status:**` line. Change nothing else in `PLAN.md`.
